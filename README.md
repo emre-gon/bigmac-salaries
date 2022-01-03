@@ -43,7 +43,7 @@ This project uses data from The Economist and OECD, and <u><b>roughly</b></u> co
 
 I was using oecd average tax wedge[🔗](https://www.oecd.org/tax/tax-policy/taxing-wages-brochure.pdf) to calculate net wage from gross national minimum wage, (for countries except Turkey). This was causing purchasing power of minimum wage to look worse than it is.
 
-Instead I started to use lowest marginal individual income tax rates in this link [🔗](https://www.oecd.org/tax/tax-policy/taxing-wages-brochure.pdf).
+Instead I started to use lowest marginal individual income tax rates in this link [🔗](https://en.wikipedia.org/wiki/List_of_countries_by_tax_rates).
 
 If there is a better source feel free to contribute.
 
