@@ -23,6 +23,7 @@ namespace BigMacReporter.Domain
         [Required]
         public virtual Currency Currency { get; set; }
 
+
     }
 
 

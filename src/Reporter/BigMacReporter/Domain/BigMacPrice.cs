@@ -9,7 +9,7 @@ namespace BigMacReporter.Domain
     public class BigMacPrice : ITableBase
     {
         [Key]
-        public virtual long Id { get; set; }
+        public virtual int Id { get; set; }
 
         [Required]
         [Unique("Date")]
@@ -24,6 +24,7 @@ namespace BigMacReporter.Domain
 
         public virtual decimal USDPrice { get; set; }
 
+        [MaxLength(50)]
         public virtual string Source { get; set; }
     }
 }

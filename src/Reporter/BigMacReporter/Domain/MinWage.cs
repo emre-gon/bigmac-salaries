@@ -9,7 +9,7 @@ namespace BigMacReporter.Domain
     public class MinWage : ITableBase
     {
         [Key]
-        public virtual long Id { get; set; }
+        public virtual int Id { get; set; }
 
         [Required]
         [Unique("Date", "Type")]
@@ -27,11 +27,10 @@ namespace BigMacReporter.Domain
 
         public virtual decimal? NetLocalPrice { get; set; }
 
+        [MaxLength(50)]
         public virtual string Source { get; set; }
 
         public virtual MinWageType Type { get; set; }
-
-
     }
 
 
@@ -41,7 +40,5 @@ namespace BigMacReporter.Domain
         Monthly = 1,
         Hourly = 2,
         Annually = 3
-
-             
     }
 }

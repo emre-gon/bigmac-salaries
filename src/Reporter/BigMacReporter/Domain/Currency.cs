@@ -16,6 +16,7 @@ namespace BigMacReporter.Domain
 
         [Unique]
         [Required]
+        [MaxLength(50)]
         public virtual string Name { get; set; }
     }
 }
