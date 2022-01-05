@@ -18,5 +18,24 @@ namespace BigMacReporter.Domain
         [Required]
         [MaxLength(50)]
         public virtual string Name { get; set; }
+
+
+
+        [Unique]
+        [Required]
+        [MaxLength(50)]
+        public virtual string NameTR { get; set; }
+
+
+        [Unique]
+        [Required]
+        [MaxLength(5)]
+        public virtual string Symbol { get; set; }
+
+
+        public virtual string SymbolOrCode()
+        {
+            return Symbol != null ? Symbol : CurrencyCode;
+        }
     }
 }

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace BigMacReporter.Domain
 {
-    public class TaxRate : ITableBase
+    public class TaxWedge : ITableBase
     {
 
         [Key]

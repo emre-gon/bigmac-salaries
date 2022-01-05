@@ -42,6 +42,13 @@ namespace BigMacReporter
 
 
 
+
+            string str = Tweets.MinWageCompare("GBR", "TUR");// new DateTime(2021,12,20));
+
+
+            Console.WriteLine(str);
+
+
         }
     }
 }
