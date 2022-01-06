@@ -39,8 +39,9 @@ namespace BigMacReporter.Domain
         {
             return string.Concat(FlagCode.ToUpper().Select(x => char.ConvertFromUtf32(x + 0x1F1A5)));
         }
+
+
+        [MaxLength(50)]
+        public virtual string DefaultMinWageSource { get; set; }
     }
-
-
-
 }

@@ -28,6 +28,7 @@ namespace BigMacReporter
 
             tweet.AppendLine($"{country1.EmojiFlagCode()}#{country1.CountryCode} 🆚 {country2.EmojiFlagCode()}#{country2.CountryCode}");
 
+            tweet.AppendLine();
 
             tweet.AppendLine("Net asgari ücret:");
              
@@ -54,7 +55,7 @@ namespace BigMacReporter
 
             decimal denklik = c1AsgariBigmacSayisi * c2BigMac.Value;
 
-            tweet.AppendLine($"#BigMac hesabına göre {country1.NameTR.DeDa()} asgari ücret {country2.NameTR.DeDa()} {denklik.ToString("F0")}{country2.Currency.SymbolOrCode()}'ya denk");
+            tweet.Append($"#BigMac hesabına göre {country1.NameTR.DeDa()} asgari ücretin alım gücü {country2.NameTR.DeDa()} aylık net {denklik.ToString("F0")}{country2.Currency.SymbolOrCode()}'ya denk.");
 
 
 
@@ -70,7 +71,7 @@ namespace BigMacReporter
             tweet2.AppendLine($"{country2.NameTR}: {c2AsgariBigmacSayisi.ToString("F0")}🍔");
 
 
-
+            string str2 = tweet2.ToString();
             return str;
 
         }
