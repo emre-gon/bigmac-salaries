@@ -68,7 +68,7 @@ namespace BigMacReporter
             tweet2.AppendLine("Asgari Ücretle Alınabilecek Big Mac Sayısı:");
 
             tweet2.AppendLine($"{country1.NameTR}: {c1AsgariBigmacSayisi.ToString("F0")}🍔");
-            tweet2.AppendLine($"{country2.NameTR}: {c2AsgariBigmacSayisi.ToString("F0")}🍔");
+            tweet2.Append($"{country2.NameTR}: {c2AsgariBigmacSayisi.ToString("F0")}🍔");
 
 
             string str2 = tweet2.ToString();
