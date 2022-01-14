@@ -40,7 +40,7 @@ namespace BigMacReporter.TaxSystem
 
 
 
-        public WageModel GetAnnualWage(WageModel input)
+        public virtual WageModel GetAnnualWage(WageModel input)
         {
             if (input.Type == Domain.MinWageType.Annually)
                 return input;
@@ -74,10 +74,20 @@ namespace BigMacReporter.TaxSystem
         {
             var wage = GetAnnualWage(input);
 
-            wage.GrossLocalPrice /= 12;
-            wage.NetLocalPrice /= 12;
+            WageModel wr = new WageModel()
+            {
+                Date = wage.Date,
+                GrossLocalPrice = wage.GrossLocalPrice / 12,
+                NetLocalPrice = wage.NetLocalPrice / 12,
+                TaxWedge = wage.TaxWedge,
+                Type = Domain.MinWageType.Monthly,
+                Profession = wage.Profession,
 
-            return wage;
+
+            };
+
+            return wr;
+
         }
     }
 }

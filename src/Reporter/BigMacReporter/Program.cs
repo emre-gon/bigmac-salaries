@@ -24,26 +24,9 @@ namespace BigMacReporter
 
 
 
-            if (!SlSession.NH.Query<CurrencyUSDValue>().Any(f => f.Currency.CurrencyCode == "USD"))
-            {
-                using (var trns = SlSession.NH.BeginTransaction())
-                {
-                    CurrencyUSDValue v = new CurrencyUSDValue()
-                    {
-                        Currency = SlSession.NH.Load<Currency>("USD"),
-                        Close = 1,
-                        Date = new DateTime(1900, 1, 1)
-                    };
-
-                    SlSession.NH.Save(v);
-                    trns.Commit();
-                }
-            }
 
 
-
-
-            string str = Tweets.MinWageCompare("RUS", "TUR");// new DateTime(2021,12,20));
+            string str = Tweets.MinWageCompare("JPN", "TUR");// new DateTime(2021,12,20));
 
 
             Console.WriteLine(str);
