@@ -39,6 +39,7 @@ namespace BigMacReporter.Domain
     {
         Monthly = 1,
         Hourly = 2,
-        Annually = 3
+        Annually = 3,
+        Daily = 4
     }
 }

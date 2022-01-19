@@ -9,40 +9,58 @@ namespace BigMacReporter
 {
     public static class Tweets
     {
-        public static string MinWageCompare(string Country1Code, string Country2Code, DateTime? dateTime = null)
+        public static string MinWageCompare(string Country1Code, string Country2Code, DateTime? Country1DateTime = null, DateTime? Country2DateTime = null)
         {
 
             var country1 = SlSession.NH.Get<Country>(Country1Code);
             var country2 = SlSession.NH.Get<Country>(Country2Code);
 
 
-            var c1MinWage = country1.GetMinWage(dateTime);
-            var c2MinWage = country2.GetMinWage(dateTime);
+            var c1MinWage = country1.GetMinWage(Country1DateTime);
+            var c2MinWage = country2.GetMinWage(Country2DateTime);
 
-            var c1BigMac = country1.GetBigMacPrice(dateTime);
-            var c2BigMac = country2.GetBigMacPrice(dateTime);
+            var c1BigMac = country1.GetBigMacPrice(Country1DateTime);
+            var c2BigMac = country2.GetBigMacPrice(Country2DateTime);
 
 
             StringBuilder tweet = new StringBuilder();
 
+            string country1Year = "";
+            string country2Year = "";
+            if (Country1DateTime.HasValue || Country2DateTime.HasValue)
+            {
+                country1Year = " " +  Country1DateTime.Value.Year.ToString();
 
-            tweet.AppendLine($"{country1.EmojiFlagCode()}#{country1.CountryCode} 🆚 {country2.EmojiFlagCode()}#{country2.CountryCode}");
+                if (Country2DateTime.HasValue)
+                {
+                    country2Year = " " + Country2DateTime.Value.Year.ToString();
+                }
+                else
+                {
+                    country2Year = " " + DateTime.Now.Date.Year;
+                }
+            }
+
+            
+
+
+            tweet.AppendLine($"{country1.EmojiFlagCode()}#{country1.CountryCode}{country1Year} 🆚 {country2.EmojiFlagCode()}#{country2.CountryCode}{country2Year}");
 
             tweet.AppendLine();
 
             tweet.AppendLine("Net asgari ücret:");
              
 
-            tweet.AppendLine($"{country1.NameTR}: {c1MinWage.NetLocalPrice.Value.ToString("F0")}{country1.Currency.SymbolOrCode()}");
-            tweet.AppendLine($"{country2.NameTR}: {c2MinWage.NetLocalPrice.Value.ToString("F0")}{country2.Currency.SymbolOrCode()}");
+            tweet.AppendLine($"{country1.NameTR}{country1Year}: {c1MinWage.NetLocalPrice.Value.ToString("F0")}{country1.Currency.SymbolOrCode()}");
+            tweet.AppendLine($"{country2.NameTR}{country2Year}: {c2MinWage.NetLocalPrice.Value.ToString("F0")}{country2.Currency.SymbolOrCode()}");
 
             tweet.AppendLine();
 
 
             tweet.AppendLine("Big Mac Fiyatı:");
 
-            tweet.AppendLine($"{country1.NameTR}: {c1BigMac.Value.ToString("F2")}{country1.Currency.SymbolOrCode()}");
-            tweet.AppendLine($"{country2.NameTR}: {c2BigMac.Value.ToString("F2")}{country2.Currency.SymbolOrCode()}");
+            tweet.AppendLine($"{country1.NameTR}{country1Year}: {c1BigMac.Value.ToString("F2")}{country1.Currency.SymbolOrCode()}");
+            tweet.AppendLine($"{country2.NameTR}{country2Year}: {c2BigMac.Value.ToString("F2")}{country2.Currency.SymbolOrCode()}");
 
 
             tweet.AppendLine();
@@ -67,8 +85,8 @@ namespace BigMacReporter
             StringBuilder tweet2 = new StringBuilder();
             tweet2.AppendLine("Asgari Ücretle Alınabilecek Big Mac Sayısı:");
 
-            tweet2.AppendLine($"{country1.NameTR}: {c1AsgariBigmacSayisi.ToString("F0")}🍔");
-            tweet2.Append($"{country2.NameTR}: {c2AsgariBigmacSayisi.ToString("F0")}🍔");
+            tweet2.AppendLine($"{country1.NameTR}{country1Year}: {c1AsgariBigmacSayisi.ToString("F0")}🍔");
+            tweet2.Append($"{country2.NameTR}{country2Year}: {c2AsgariBigmacSayisi.ToString("F0")}🍔");
 
 
             string str2 = tweet2.ToString();

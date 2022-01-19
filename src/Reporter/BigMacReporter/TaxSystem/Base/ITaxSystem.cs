@@ -59,9 +59,12 @@ namespace BigMacReporter.TaxSystem
                 tbr.GrossLocalPrice = input.GrossLocalPrice * 12;
                 tbr.NetLocalPrice = input.NetLocalPrice * 12;
             }
-
-
-            if (input.Type == Domain.MinWageType.Hourly)
+            else if(input.Type == Domain.MinWageType.Daily)
+            {
+                tbr.GrossLocalPrice = input.GrossLocalPrice * 253;
+                tbr.NetLocalPrice = input.NetLocalPrice * 253;
+            }
+            else if (input.Type == Domain.MinWageType.Hourly)
             {
                 tbr.GrossLocalPrice = input.GrossLocalPrice * 1950;
                 tbr.NetLocalPrice = input.NetLocalPrice * 1950;
