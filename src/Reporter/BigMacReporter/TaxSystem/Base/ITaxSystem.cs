@@ -40,7 +40,7 @@ namespace BigMacReporter.TaxSystem
 
 
 
-        public virtual WageModel GetAnnualWage(WageModel input)
+        public WageModel GetAnnualWage(WageModel input)
         {
             if (input.Type == Domain.MinWageType.Annually)
                 return input;
@@ -61,16 +61,27 @@ namespace BigMacReporter.TaxSystem
             }
             else if(input.Type == Domain.MinWageType.Daily)
             {
-                tbr.GrossLocalPrice = input.GrossLocalPrice * 253;
-                tbr.NetLocalPrice = input.NetLocalPrice * 253;
+                tbr.GrossLocalPrice = input.GrossLocalPrice * GetTotalAnnualWorkDays();
+                tbr.NetLocalPrice = input.NetLocalPrice * GetTotalAnnualWorkDays();
             }
             else if (input.Type == Domain.MinWageType.Hourly)
             {
-                tbr.GrossLocalPrice = input.GrossLocalPrice * 1950;
-                tbr.NetLocalPrice = input.NetLocalPrice * 1950;
+                tbr.GrossLocalPrice = input.GrossLocalPrice * GetTotalAnnualWorkHours();
+                tbr.NetLocalPrice = input.NetLocalPrice * GetTotalAnnualWorkHours();
             }
 
             return tbr;
+        }
+
+
+        public virtual int GetTotalAnnualWorkHours()
+        {
+            return 1950;
+        }
+
+        public virtual int GetTotalAnnualWorkDays()
+        {
+            return 253;
         }
 
         public WageModel GetMonthlyWage(WageModel input)

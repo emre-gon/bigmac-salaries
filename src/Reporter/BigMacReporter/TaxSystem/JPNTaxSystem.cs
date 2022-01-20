@@ -46,24 +46,9 @@ namespace BigMacReporter.TaxSystem.Base
             return "JPN";
         }
 
-        public override WageModel GetAnnualWage(WageModel input)
+        public override int GetTotalAnnualWorkHours()
         {
-            if(input.Type == Domain.MinWageType.Hourly)
-            {
-                WageModel tbr = new WageModel()
-                {
-                    Type = Domain.MinWageType.Annually,
-                    Profession = input.Profession,
-                    Date = input.Date,
-                    TaxWedge = input.TaxWedge
-                };
-                tbr.GrossLocalPrice = input.GrossLocalPrice * 2160;
-                tbr.NetLocalPrice = input.NetLocalPrice * 2160;
-
-                return tbr;
-            }
-
-            return base.GetAnnualWage(input);
+            return 2160;
         }
     }
 }
