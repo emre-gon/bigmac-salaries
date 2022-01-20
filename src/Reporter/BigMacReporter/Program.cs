@@ -26,12 +26,10 @@ namespace BigMacReporter
 
 
 
-            string str = Tweets.MinWageCompare("TUR", "TUR", new DateTime(2016,1,1));// new DateTime(2021,12,20));
+            var tweets = Tweets.MinWageCompare("ZAF", "TUR");// new DateTime(2021,12,20));
 
 
-            Console.WriteLine(str);
-
-
+            Console.WriteLine(tweets);
         }
     }
 }
