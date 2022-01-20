@@ -35,7 +35,7 @@ namespace BigMacReporter.Domain
 
         public virtual string SymbolOrCode()
         {
-            return Symbol != null ? Symbol : CurrencyCode;
+            return Symbol != null ? Symbol :  " " + CurrencyCode;
         }
     }
 }
