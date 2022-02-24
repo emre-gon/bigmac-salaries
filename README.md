@@ -9,7 +9,7 @@
 
 [![Status](https://img.shields.io/badge/status-active-success.svg)]()
 [![License](https://img.shields.io/github/license/emre-gon/bigmac-index)](/LICENSE)
-[![Twitter](https://img.shields.io/twitter/follow/bigmac_maaslari?style=social)]()
+[![Twitter](https://img.shields.io/twitter/follow/bigmac_maaslari?style=social)](https://twitter.com/intent/follow?screen_name=bigmac_maaslari)
 
 
 
