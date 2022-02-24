@@ -10,12 +10,12 @@ namespace BigMacReporter.TaxSystem
         /// <summary>
         /// up to -> ratio
         /// </summary>
-        private SortedDictionary<int, double> rates = new SortedDictionary<int, double>()
+        private SortedDictionary<long, double> rates = new SortedDictionary<long, double>()
         {
             { 12570, 0 }, //personal allowance
             { 50270, 0.2 }, //basic rate
             { 150000, 0.4 }, //higher rate
-            { int.MaxValue, 0.45 }, //additional rate
+            { long.MaxValue, 0.45 }, //additional rate
         };
 
 
@@ -25,23 +25,11 @@ namespace BigMacReporter.TaxSystem
 
             decimal taxableIncome = AnnualGrossWage - rates.First().Key;
 
-            foreach(var rate in rates)
-            {
-                decimal maxLimit = rate.Key;
 
-                if (AnnualGrossWage < maxLimit)
-                {
-                    decimal ratePerc = (decimal)rate.Value;
+            decimal rate = GetRateFromDict(taxableIncome, rates);
 
 
-                    return AnnualGrossWage - (taxableIncome * ratePerc);
-                }
-            }
-
-            decimal maxRate = (decimal)rates.Last().Value;
-
-
-            return AnnualGrossWage - (taxableIncome * maxRate);
+            return AnnualGrossWage - (taxableIncome * rate);
         }
 
         public override string CountryCode()

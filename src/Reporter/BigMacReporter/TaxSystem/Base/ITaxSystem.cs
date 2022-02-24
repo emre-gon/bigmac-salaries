@@ -18,7 +18,20 @@ namespace BigMacReporter.TaxSystem
 
         public abstract decimal CalculateAnnualNetWage(decimal AnnualGrossWage, DateTime date);
 
+        public static decimal GetRateFromDict(decimal TaxableIncome, SortedDictionary<long,double> rates)
+        {
+            foreach (var rate in rates)
+            {
+                decimal maxLimit = rate.Key;
 
+                if (TaxableIncome < maxLimit)
+                {
+                    return (decimal)rate.Value;
+                }
+            }
+
+            return (decimal)rates.Last().Value;
+        }
 
         public WageModel GetAnnualNetWage(WageModel input, DateTime? date = null)
         {

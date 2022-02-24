@@ -7,7 +7,7 @@ namespace BigMacReporter.TaxSystem
 {
     public class ISRTaxSystem : ITaxSystem
     {
-        private SortedDictionary<int, double> rates = new SortedDictionary<int, double>()
+        private SortedDictionary<long, double> rates = new SortedDictionary<long, double>()
         {
             { 75720, 0.1 }, 
             { 108600, 0.14 }, 
@@ -15,30 +15,14 @@ namespace BigMacReporter.TaxSystem
             { 242400, 0.31 },
             { 504360, 0.35 },
             { 649560, 0.47 },
-            { int.MaxValue, 0.50 }, 
+            { long.MaxValue, 0.50 }, 
         };
 
         public override decimal CalculateAnnualNetWage(decimal AnnualGrossWage, DateTime date)
         {
-            decimal taxableIncome = AnnualGrossWage;
+            decimal rate = GetRateFromDict(AnnualGrossWage, rates);
 
-            foreach (var rate in rates)
-            {
-                decimal maxLimit = rate.Key;
-
-                if (AnnualGrossWage < maxLimit)
-                {
-                    decimal ratePerc = (decimal)rate.Value;
-
-
-                    return AnnualGrossWage - (taxableIncome * ratePerc);
-                }
-            }
-
-            decimal maxRate = (decimal)rates.Last().Value;
-
-
-            return AnnualGrossWage - (taxableIncome * maxRate);
+            return AnnualGrossWage - (AnnualGrossWage * rate);
         }
 
         public override string CountryCode()

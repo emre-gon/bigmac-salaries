@@ -27,23 +27,11 @@ namespace BigMacReporter.TaxSystem
             decimal taxableIncome = AnnualGrossWage;
             decimal monthlyGrossWage = AnnualGrossWage / 12;
 
-            foreach (var rate in rates)
-            {
-                decimal maxLimit = rate.Key;
+            //monthly gross wage üzerinden hesaplanıyor
+            decimal rate = GetRateFromDict(monthlyGrossWage, rates);
 
-                if (monthlyGrossWage < maxLimit)
-                {
-                    decimal ratePerc = (decimal)rate.Value;
+            return AnnualGrossWage - (AnnualGrossWage * rate);
 
-
-                    return AnnualGrossWage - (taxableIncome * ratePerc);
-                }
-            }
-
-            decimal maxRate = (decimal)rates.Last().Value;
-
-
-            return AnnualGrossWage - (taxableIncome * maxRate);
         }
 
         public override string CountryCode()

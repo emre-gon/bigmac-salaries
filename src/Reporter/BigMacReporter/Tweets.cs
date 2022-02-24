@@ -120,6 +120,8 @@ namespace BigMacReporter
 
 
             tweets.Add(tweet2.ToString());
+
+            return tweets;
         }
     }
 }

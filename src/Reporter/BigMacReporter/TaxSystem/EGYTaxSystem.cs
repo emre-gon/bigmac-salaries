@@ -20,25 +20,9 @@ namespace BigMacReporter.TaxSystem
 
         public override decimal CalculateAnnualNetWage(decimal AnnualGrossWage, DateTime date)
         {
-            decimal taxableIncome = AnnualGrossWage;
+            decimal rate = GetRateFromDict(AnnualGrossWage, rates);
 
-            foreach (var rate in rates)
-            {
-                decimal maxLimit = rate.Key;
-
-                if (AnnualGrossWage < maxLimit)
-                {
-                    decimal ratePerc = (decimal)rate.Value;
-
-
-                    return AnnualGrossWage - (taxableIncome * ratePerc);
-                }
-            }
-
-            decimal maxRate = (decimal)rates.Last().Value;
-
-
-            return AnnualGrossWage - (taxableIncome * maxRate);
+            return AnnualGrossWage - (AnnualGrossWage * rate);
         }
         public override string CountryCode()
         {

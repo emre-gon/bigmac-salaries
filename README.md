@@ -8,9 +8,11 @@
 <div align="center">
 
 [![Status](https://img.shields.io/badge/status-active-success.svg)]()
-[![GitHub Issues](https://img.shields.io/github/issues/emre-gon/bigmac-index.svg)](https://github.com/emre-gon/bigmac-index/issues)
-[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/emre-gon/bigmac-index.svg)](https://github.com/emre-gon/bigmac-index/pulls)
 [![License](https://img.shields.io/github/license/emre-gon/bigmac-index)](/LICENSE)
+[![Twitter](https://img.shields.io/twitter/follow/bigmac_maaslari?style=social)]()
+
+
+
 
 </div>
 
