@@ -26,7 +26,7 @@ namespace BigMacReporter
 
 
 
-            var tweets = Tweets.MinWageCompare("TWN", "TUR");// new DateTime(2021,12,20));
+            var tweets = Tweets.MinWageCompare("USA", "TUR");// new DateTime(2021,12,20));
 
 
             Console.WriteLine(tweets);
