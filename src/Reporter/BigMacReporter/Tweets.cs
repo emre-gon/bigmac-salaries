@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Globalization;
 
 namespace BigMacReporter
 {
@@ -27,40 +28,69 @@ namespace BigMacReporter
 
             string country1Year = "";
             string country2Year = "";
+
+            string country1Month = "";
+            string country2Month = "";
+
             if (Country1DateTime.HasValue || Country2DateTime.HasValue)
             {
                 country1Year = " " +  Country1DateTime.Value.Year.ToString();
+                country1Month = " " + Country1DateTime.Value.ToString("MMMM", new CultureInfo("tr-TR"));
+
 
                 if (Country2DateTime.HasValue)
                 {
+                    country2Month = " " + Country2DateTime.Value.ToString("MMMM", new CultureInfo("tr-TR"));
                     country2Year = " " + Country2DateTime.Value.Year.ToString();
                 }
                 else
                 {
+                    country2Month = " " + DateTime.Now.Date.ToString("MMMM", new CultureInfo("tr-TR")); 
                     country2Year = " " + DateTime.Now.Date.Year;
                 }
             }
 
-            
+                    
 
 
-            tweet1.AppendLine($"{country1.EmojiFlagCode()}#{country1.CountryCode}{country1Year} 🆚 {country2.EmojiFlagCode()}#{country2.CountryCode}{country2Year}");
+            tweet1.AppendLine($"{country1.EmojiFlagCode()}#{country1.CountryCode}{country1Month}{country1Year} 🆚 {country2.EmojiFlagCode()}#{country2.CountryCode}{country2Month}{country2Year}");
 
             tweet1.AppendLine();
 
             tweet1.AppendLine("Net asgari ücret:");
-             
 
-            tweet1.AppendLine($"{country1.NameTR}{country1Year}: {c1MinWage.NetLocalPrice.Value.ToString("F0")}{country1.Currency.SymbolOrCode()}");
-            tweet1.AppendLine($"{country2.NameTR}{country2Year}: {c2MinWage.NetLocalPrice.Value.ToString("F0")}{country2.Currency.SymbolOrCode()}");
+
+            if(!(!string.IsNullOrEmpty(country1Year)
+                && country1Year == country2Year))
+            {
+                country1Month = "";
+                country2Month = "";
+            }
+
+            
+            string country1NameTr = country1.NameTR;
+            string country2NameTr = country2.NameTR;
+
+
+            if(country1NameTr == country2NameTr)
+            {
+                country1NameTr = "";
+                country2NameTr = "";
+                country1Month = country1Month.Trim();
+                country2Month = country2Month.Trim();
+            }
+
+            tweet1.AppendLine($"{country1NameTr}{country1Month}{country1Year}: {c1MinWage.NetLocalPrice.Value.ToString("F0")}{country1.Currency.SymbolOrCode()}");
+            tweet1.AppendLine($"{country2NameTr}{country2Month}{country2Year}: {c2MinWage.NetLocalPrice.Value.ToString("F0")}{country2.Currency.SymbolOrCode()}");
+
 
             tweet1.AppendLine();
 
 
             tweet1.AppendLine("Big Mac Fiyatı:");
 
-            tweet1.AppendLine($"{country1.NameTR}{country1Year}: {c1BigMac.Value.ToString("F2")}{country1.Currency.SymbolOrCode()}");
-            tweet1.AppendLine($"{country2.NameTR}{country2Year}: {c2BigMac.Value.ToString("F2")}{country2.Currency.SymbolOrCode()}");
+            tweet1.AppendLine($"{country1NameTr}{country1Month}{country1Year}: {c1BigMac.Value.ToString("F2")}{country1.Currency.SymbolOrCode()}");
+            tweet1.AppendLine($"{country2NameTr}{country2Month}{country2Year}: {c2BigMac.Value.ToString("F2")}{country2.Currency.SymbolOrCode()}");
 
 
             tweet1.AppendLine();
@@ -100,7 +130,7 @@ namespace BigMacReporter
             }
 
 
-            tweet1.Append($"#BigMac hesabına göre {c1YearDeDa}{country1.NameTR.DeDa()} asgari ücretin alım gücü {c2CountryYearDeda} aylık net {denklik.ToString("F0")}{country2.Currency.SymbolOrCode()}'ya denk.");
+            tweet1.Append($"#BigMac hesabına göre {country1Month} {c1YearDeDa}{country1NameTr.DeDa()}asgari ücretin alım gücü {country2Month} {c2CountryYearDeda} aylık net {denklik.ToString("F0")}{country2.Currency.SymbolOrCode()}'ya denk.");
 
 
 
@@ -115,8 +145,8 @@ namespace BigMacReporter
             StringBuilder tweet2 = new StringBuilder();
             tweet2.AppendLine("Asgari Ücretle Alınabilecek Big Mac Sayısı:");
 
-            tweet2.AppendLine($"{country1.NameTR}{country1Year}: {c1AsgariBigmacSayisi.ToString("F0")}🍔");
-            tweet2.Append($"{country2.NameTR}{country2Year}: {c2AsgariBigmacSayisi.ToString("F0")}🍔");
+            tweet2.AppendLine($"{country1NameTr}{country1Month}{country1Year}: {c1AsgariBigmacSayisi.ToString("F0")}🍔");
+            tweet2.Append($"{country2NameTr}{country2Month}{country2Year}: {c2AsgariBigmacSayisi.ToString("F0")}🍔");
 
 
             tweets.Add(tweet2.ToString());

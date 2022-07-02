@@ -8,6 +8,12 @@ namespace BigMacReporter
     {
         public static string DeDa(this string Str, bool DeDaOnly = false)
         {
+            if(string.IsNullOrEmpty(Str))
+            {
+                return Str;
+            }
+
+
             string fistikciSahap = "fstkçşhp";
             string kalinlar = "aıou";
             string inceler = "eiöü";
