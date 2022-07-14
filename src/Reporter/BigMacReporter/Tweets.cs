@@ -10,6 +10,51 @@ namespace BigMacReporter
 {
     public static class Tweets
     {
+        public static string PriceHike(string CountryCode)
+        {
+            var country = SlSession.NH.Get<Country>(CountryCode);
+            var query = SlSession.NH.Query<BigMacPrice>()
+                .Where(f => f.Country.CountryCode == CountryCode)
+                .OrderByDescending(f => f.Date)
+                .Select(f=>f.LocalPrice)
+                .Take(2).ToList();
+
+
+            var currentPrice = query.First();
+            var previousPrice = query.Last();
+            var hikeRate = (currentPrice - previousPrice) / previousPrice;
+
+
+
+            int alarmRate = (int)Math.Round(Math.Max(0,Math.Log2((double)hikeRate * 100))) + 1;
+
+
+
+            StringBuilder tweet = new StringBuilder("#zam ");
+            
+            for(int i = 0; i < alarmRate; i++)
+            {
+                tweet.Append("🚨");
+            }
+
+            tweet.AppendLine();
+            tweet.AppendLine();
+
+            tweet.AppendLine($"BigMac {currentPrice.ToString("0.##")}{country.Currency.Symbol} oldu.");
+
+            tweet.AppendLine();
+
+            tweet.AppendLine($"Bir önceki fiyat: {previousPrice.ToString("0.##")}{country.Currency.Symbol}");
+
+
+            tweet.Append($"Zam oranı: {hikeRate.ToString("p2", new CultureInfo("tr-TR"))}");
+
+            return tweet.ToString();
+
+        }
+
+
+
         public static List<string> MinWageCompare(string Country1Code, string Country2Code, DateTime? Country1DateTime = null, DateTime? Country2DateTime = null)
         {
 
