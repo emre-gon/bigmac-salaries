@@ -55,15 +55,17 @@ namespace BigMacReporter
 
 
 
-        public static List<string> MinWageCompare(string Country1Code, string Country2Code, DateTime? Country1DateTime = null, DateTime? Country2DateTime = null)
+        public static List<string> MinWageCompare(string Country1Code, string Country2Code,
+            DateTime? Country1DateTime = null, DateTime? Country2DateTime = null,
+            string Profession = "General")
         {
 
             var country1 = SlSession.NH.Get<Country>(Country1Code);
             var country2 = SlSession.NH.Get<Country>(Country2Code);
 
 
-            var c1MinWage = country1.GetMinWage(Country1DateTime);
-            var c2MinWage = country2.GetMinWage(Country2DateTime);
+            var c1MinWage = country1.GetMinWage(Profession, Country1DateTime);
+            var c2MinWage = country2.GetMinWage(Profession, Country2DateTime);
 
             var c1BigMac = country1.GetBigMacPrice(Country1DateTime);
             var c2BigMac = country2.GetBigMacPrice(Country2DateTime);
@@ -95,6 +97,7 @@ namespace BigMacReporter
                 }
             }
 
+
                     
 
 
@@ -102,7 +105,21 @@ namespace BigMacReporter
 
             tweet1.AppendLine();
 
-            tweet1.AppendLine("Net asgari ücret:");
+
+
+            string professionStr;
+            switch (Profession)
+            {
+                case "KYK Bursu":
+                    professionStr = "KYK Bursu";
+                    break;
+                default:
+                    professionStr = "Net asgari ücret";
+                    break;
+            }
+
+
+            tweet1.AppendLine($"{professionStr}:");
 
 
             if(!(!string.IsNullOrEmpty(country1Year)
@@ -175,7 +192,24 @@ namespace BigMacReporter
             }
 
 
-            tweet1.Append($"#BigMac hesabına göre {country1Month} {c1YearDeDa}{country1NameTr.DeDa()}asgari ücretin alım gücü {country2Month} {c2CountryYearDeda} aylık net {denklik.ToString("F0")}{country2.Currency.SymbolOrCode()}'ya denk.");
+
+
+            string professionStr2;
+            switch (Profession)
+            {
+                case "KYK Bursu":
+                    professionStr2 = "KYK Bursunun";
+                    break;
+                default:
+                    professionStr2 = "asgari ücretin";
+                    break;
+            }
+
+
+
+
+
+            tweet1.Append($"#BigMac hesabına göre {country1Month} {c1YearDeDa}{country1NameTr.DeDa()}{professionStr2} alım gücü {country2Month} {c2CountryYearDeda} aylık net {denklik.ToString("F0")}{country2.Currency.SymbolOrCode()}'ya denk.");
 
 
 
@@ -187,8 +221,20 @@ namespace BigMacReporter
 
 
 
+            string professionStr3;
+            switch (Profession)
+            {
+                case "KYK Bursu":
+                    professionStr3 = "KYK Bursuyla";
+                    break;
+                default:
+                    professionStr3 = "Asgari Ücretle";
+                    break;
+            }
+
+
             StringBuilder tweet2 = new StringBuilder();
-            tweet2.AppendLine("Asgari Ücretle Alınabilecek Big Mac Sayısı:");
+            tweet2.AppendLine($"{professionStr3} Alınabilecek Big Mac Sayısı:");
 
             tweet2.AppendLine($"{country1NameTr}{country1Month}{country1Year}: {c1AsgariBigmacSayisi.ToString("F0")}🍔");
             tweet2.Append($"{country2NameTr}{country2Month}{country2Year}: {c2AsgariBigmacSayisi.ToString("F0")}🍔");

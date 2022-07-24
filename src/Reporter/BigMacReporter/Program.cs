@@ -26,7 +26,9 @@ namespace BigMacReporter
 
 
 
-            var tweets = Tweets.MinWageCompare("TUR", "TUR", new DateTime(2022, 1, 1), new DateTime(2022, 7, 1));
+            var tweets = Tweets.MinWageCompare("TUR", "TUR", 
+                new DateTime(2002, 5, 1), new DateTime(2022, 7, 10),
+                "KYK Bursu");
 
 
             var hikeTweet = Tweets.PriceHike("TUR");
