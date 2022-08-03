@@ -10,6 +10,41 @@ namespace BigMacReporter
 {
     public static class Tweets
     {
+        public static string Enflasyon(string CountryCode)
+        {
+            var today = DateTime.Now.Date;
+            return Enflasyon(CountryCode, today.AddYears(-1), today);
+        }
+
+        public static string Enflasyon(string CountryCode, DateTime To)
+        {
+            return Enflasyon(CountryCode, To.AddYears(-1), To);
+        }
+
+
+        public static string Enflasyon(string CountryCode, DateTime From, DateTime To)
+        {
+            var country = SlSession.NH.Get<Country>(CountryCode);
+            var fromPrice = country.GetBigMacPrice(From).Value;
+            var toPrice = country.GetBigMacPrice(To).Value;
+
+
+            var hikeRate = (toPrice - fromPrice) / fromPrice;
+
+
+
+            StringBuilder tweet = new StringBuilder($"{ country.EmojiFlagCode() }#{country.CountryCode}");
+            tweet.AppendLine();
+            tweet.AppendLine($"{From.ToString("MMMM yyyy", new CultureInfo("tr-TR"))}: {fromPrice.ToString("0.##")}{country.Currency.Symbol}");
+            tweet.AppendLine($"{To.ToString("MMMM yyyy", new CultureInfo("tr-TR"))}: {toPrice.ToString("0.##")}{country.Currency.Symbol}");
+
+            tweet.AppendLine();
+            tweet.AppendLine($"Big Mac hesabına göre enflasyon: {hikeRate.ToString("p2", new CultureInfo("tr-TR"))}");
+
+            return tweet.ToString();
+        }
+
+
         public static string PriceHike(string CountryCode)
         {
             var country = SlSession.NH.Get<Country>(CountryCode);
