@@ -25,14 +25,15 @@ namespace BigMacReporter
 
             var enfTweet = Tweets.Enflasyon("TUR");
 
-
-            var tweets = Tweets.MinWageCompare("TUR", "TUR", 
-                new DateTime(2002, 5, 1), new DateTime(2022, 8, 10),
-                "KYK Bursu");
-
-
             var hikeTweet = Tweets.PriceHike("TUR");
 
+
+
+
+            var tweets = Tweets.MinWageCompare("GBR", "TUR");
+
+
+            var tweets2 = Tweets.MinWageCompare("TUR", "GBR");
 
             Console.WriteLine(tweets);
         }

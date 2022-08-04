@@ -41,7 +41,7 @@ namespace BigMacReporter
             tweet.AppendLine();
             tweet.AppendLine($"Big Mac hesabına göre enflasyon: {hikeRate.ToString("p2", new CultureInfo("tr-TR"))}");
 
-            return tweet.ToString();
+            return tweet.ToStringTrim();
         }
 
 
@@ -84,7 +84,7 @@ namespace BigMacReporter
 
             tweet.Append($"Zam oranı: {hikeRate.ToString("p2", new CultureInfo("tr-TR"))}");
 
-            return tweet.ToString();
+            return tweet.ToStringTrim();
 
         }
 
@@ -244,7 +244,7 @@ namespace BigMacReporter
 
 
 
-            tweet1.Append($"#BigMac hesabına göre {country1Month} {c1YearDeDa}{country1NameTr.DeDa()}{professionStr2} alım gücü {country2Month} {c2CountryYearDeda} aylık net {denklik.ToString("F0")}{country2.Currency.SymbolOrCode()}'ya denk.");
+            tweet1.Append($"#BigMac hesabına göre {country1Month} {c1YearDeDa}{country1NameTr.DeDa()} {professionStr2} alım gücü {country2Month} {c2CountryYearDeda} aylık net {denklik.ToString("F0")}{country2.Currency.SymbolOrCode()}'ya denk.");
 
 
 
@@ -252,7 +252,7 @@ namespace BigMacReporter
 
             List<string> tweets = new List<string>();
 
-            tweets.Add(tweet1.ToString());
+            tweets.Add(tweet1.ToStringTrim());
 
 
 
@@ -275,7 +275,7 @@ namespace BigMacReporter
             tweet2.Append($"{country2NameTr}{country2Month}{country2Year}: {c2AsgariBigmacSayisi.ToString("F0")}🍔");
 
 
-            tweets.Add(tweet2.ToString());
+            tweets.Add(tweet2.ToStringTrim());
 
             return tweets;
         }
