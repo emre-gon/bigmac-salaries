@@ -199,6 +199,7 @@ namespace BigMacReporter
 
 
             decimal denklik = c1AsgariBigmacSayisi * c2BigMac.Value;
+            decimal terstenDeklik = c2AsgariBigmacSayisi * c1BigMac.Value;
 
 
             string c1YearDeDa = "";
@@ -276,6 +277,17 @@ namespace BigMacReporter
 
 
             tweets.Add(tweet2.ToStringTrim());
+
+
+
+
+            StringBuilder tweet3 = new StringBuilder($"{country2NameTr.DeDa()}ki asgari ücretin alım gücünün {country1NameTr.DeDa()}ki karşılığı:");
+            tweet3.AppendLine();
+            tweet3.AppendLine();
+            tweet3.Append($"Aylık Net: {terstenDeklik.ToString("F0")}{country1.Currency.SymbolOrCode()}");
+
+            tweets.Add(tweet3.ToStringTrim());
+
 
             return tweets;
         }

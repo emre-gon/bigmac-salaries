@@ -23,17 +23,13 @@ namespace BigMacReporter
 
 
 
-            var enfTweet = Tweets.Enflasyon("TUR");
+            //var enfTweet = Tweets.Enflasyon("TUR");
 
-            var hikeTweet = Tweets.PriceHike("TUR");
-
-
+            //var hikeTweet = Tweets.PriceHike("TUR");
 
 
-            var tweets = Tweets.MinWageCompare("GBR", "TUR");
+            var tweets = Tweets.MinWageCompare("ISR", "TUR");
 
-
-            var tweets2 = Tweets.MinWageCompare("TUR", "GBR");
 
             Console.WriteLine(tweets);
         }
