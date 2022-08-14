@@ -23,7 +23,6 @@
 
 - [About](#about)
 - [Known Issues](#issues)
-- [Deployment](#deployment)
 - [Tech](#tech)
 - [Authors](#authors)
 - [References](#references)

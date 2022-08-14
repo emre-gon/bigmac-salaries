@@ -28,7 +28,7 @@ namespace BigMacReporter
             //var hikeTweet = Tweets.PriceHike("TUR");
 
 
-            var tweets = Tweets.MinWageCompare("ISR", "TUR");
+            var tweets = Tweets.MinWageCompare("POL", "TUR");
 
 
             Console.WriteLine(tweets);
