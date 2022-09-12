@@ -23,12 +23,17 @@ namespace BigMacReporter
                 AtDate = AtDate.Value.AddDays(1);
             }
 
+
+            var sp = Profession.Split('/');
+            string professionEnding = sp[sp.Length - 1];
+
             var mw = (from z in SlSession.NH.Query<MinWage>()
                       orderby z.Date descending
                       where z.Country.CountryCode == country.CountryCode
                           && (country.DefaultMinWageSource == null || z.Source == country.DefaultMinWageSource)
                           && (AtDate == null || z.Date < AtDate)
-                          && z.Profession == Profession
+                          && (z.Profession == Profession || z.Profession == professionEnding)
+                        orderby z.Profession == Profession descending
                       select new WageModel
                       {
                           Profession = z.Profession,

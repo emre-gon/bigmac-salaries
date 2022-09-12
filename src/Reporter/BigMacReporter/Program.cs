@@ -25,10 +25,10 @@ namespace BigMacReporter
 
             //var enfTweet = Tweets.Enflasyon("TUR");
 
-            //var hikeTweet = Tweets.PriceHike("TUR");
+            var hikeTweet = Tweets.PriceHike("TUR");
 
 
-            var tweets = Tweets.MinWageCompare("POL", "TUR");
+            var tweets = Tweets.MinWageCompare("PRT", "TUR");
 
 
             Console.WriteLine(tweets);
